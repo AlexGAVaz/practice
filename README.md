@@ -132,3 +132,16 @@ docker compose down
 ```bash
 docker compose down -v
 ```
+
+## 9) Нагрузочное тестирование
+
+Запуск теста (пример: 20 одновременных пользователей, 200 запросов):
+
+```bash
+docker compose exec app python scripts/load_test.py --base-url http://app:8000 --users 20 --requests 200
+```
+
+Что делает тест:
+- логинится в API;
+- отправляет серию конкурентных запросов `POST /transactions`;
+- считает успешные/ошибочные ответы, RPS, среднюю задержку и P95.
